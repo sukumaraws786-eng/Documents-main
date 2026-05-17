@@ -62,105 +62,169 @@ const TransactionTablePage = () => {
 
     return (
         <>
-            <fieldset>
-                <p>
-                    Description: Enter Sort Code and Account Number to view account
-                    balance and transactions. Optionally supply a date range to filter
-                    transactions by initiation date.
-                </p>
-                <p>Demo payload: {JSON.stringify({ "sortCode": "53-68-92", "accountNumber": "73084635" })}</p>
+            {/* ── Top Navigation Bar ── */}
+            <nav className="bank-nav">
+                <div className="bank-nav__logo">
+                    <div className="bank-nav__icon">🏦</div>
+                    <div>
+                        <div className="bank-nav__name">Trust<span>Bank</span></div>
+                        <div className="bank-nav__tag">Online Banking</div>
+                    </div>
+                </div>
+                <div className="bank-nav__tag">Secure &amp; Encrypted</div>
+            </nav>
 
-                <p><strong>Task 1: Current balance is displayed below the form once account is loaded.</strong></p>
-                <p><strong>Task 2: Use the Start Date / End Date fields to filter transactions by date range.</strong></p>
+            {/* ── Page Body ── */}
+            <div className="bank-page">
+                <div className="bank-container">
 
-                <br />
-                <li>Start Date and End Date are <strong>inclusive</strong> (e.g. 2019-04-01 to 2019-06-01 includes both boundary dates).</li>
-                <li>Leave date fields empty to retrieve all transactions.</li>
-            </fieldset>
+                    <div className="bank-page-title">Account Statement</div>
+                    <div className="bank-page-subtitle">
+                        Enter your sort code and account number to view your balance and transactions.
+                    </div>
 
-            <form onSubmit={handleSubmit}>
-                <fieldset>
-                    {/* Sort code and account number inputs (existing) */}
-                    <label>
-                        <p>Sort Code:</p>
-                        <input
-                            type="text"
-                            name="sortCode"
-                            onChange={(e) => handleChange(e)}
-                            value={formData.sortCode || ''}
-                        />
-                    </label>
+                    {/* ── Search Form Card ── */}
+                    <div className="bank-card">
+                        <div className="bank-card__title">
+                            🔍 Account Lookup
+                        </div>
 
-                    <label>
-                        <p>Account Number:</p>
-                        <input
-                            type="text"
-                            name="accountNumber"
-                            onChange={(e) => handleChange(e)}
-                            value={formData.accountNumber || ''}
-                        />
-                    </label>
+                        <form onSubmit={handleSubmit}>
+                            <div className="bank-form-grid">
+                                {/* Sort Code */}
+                                <div className="bank-field">
+                                    <label htmlFor="sortCode">Sort Code:</label>
+                                    <input
+                                        id="sortCode"
+                                        type="text"
+                                        name="sortCode"
+                                        placeholder="e.g. 53-68-92"
+                                        onChange={(e) => handleChange(e)}
+                                        value={formData.sortCode || ''}
+                                    />
+                                    <span className="bank-hint">Format: XX-XX-XX</span>
+                                </div>
 
-                    {/* Task 2: Date range inputs – sent to backend to filter by initiationDate */}
-                    <label>
-                        <p>Start Date (optional):</p>
-                        <input
-                            type="date"
-                            name="startDate"
-                            onChange={(e) => handleChange(e)}
-                            value={formData.startDate || ''}
-                        />
-                    </label>
+                                {/* Account Number */}
+                                <div className="bank-field">
+                                    <label htmlFor="accountNumber">Account Number:</label>
+                                    <input
+                                        id="accountNumber"
+                                        type="text"
+                                        name="accountNumber"
+                                        placeholder="e.g. 73084635"
+                                        onChange={(e) => handleChange(e)}
+                                        value={formData.accountNumber || ''}
+                                    />
+                                    <span className="bank-hint">8-digit account number</span>
+                                </div>
 
-                    <label>
-                        <p>End Date (optional):</p>
-                        <input
-                            type="date"
-                            name="endDate"
-                            onChange={(e) => handleChange(e)}
-                            value={formData.endDate || ''}
-                        />
-                    </label>
+                                {/* Task 2: Start Date */}
+                                <div className="bank-field">
+                                    <label htmlFor="startDate">Start Date <em style={{fontWeight:400,color:'#9ca3af'}}>(optional)</em></label>
+                                    <input
+                                        id="startDate"
+                                        type="date"
+                                        name="startDate"
+                                        onChange={(e) => handleChange(e)}
+                                        value={formData.startDate || ''}
+                                    />
+                                    <span className="bank-hint">Filter transactions from this date</span>
+                                </div>
 
-                    <button type="submit">Submit</button>
-                </fieldset>
+                                {/* Task 2: End Date */}
+                                <div className="bank-field">
+                                    <label htmlFor="endDate">End Date <em style={{fontWeight:400,color:'#9ca3af'}}>(optional)</em></label>
+                                    <input
+                                        id="endDate"
+                                        type="date"
+                                        name="endDate"
+                                        onChange={(e) => handleChange(e)}
+                                        value={formData.endDate || ''}
+                                    />
+                                    <span className="bank-hint">Filter transactions up to this date</span>
+                                </div>
+                            </div>
 
-                {!_.isEmpty(data) && (
-                    <fieldset>
-                        {/*
-                          * Task 1: Display the current balance from account.currentBalance.
-                          * toFixed(2) formats the number to two decimal places (e.g. 1071.78).
-                          */}
-                        <p>
-                            <strong>
-                                Current Balance: £{data.currentBalance != null
-                                    ? data.currentBalance.toFixed(2)
-                                    : 'N/A'}
-                            </strong>
-                        </p>
+                            <div className="bank-info-row">
+                                <span className="bank-chip">📅 Date range is inclusive</span>
+                                <span className="bank-chip">💡 Leave dates empty for all transactions</span>
+                            </div>
 
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <th>Account Number</th>
-                                    <th>Target Owner Name</th>
-                                    <th>Amount (£)</th>
-                                    <th>Initiation Date</th>
-                                </tr>
-                                {data?.transactions?.map(transaction => (
-                                    // key suppresses React virtual-DOM warning and enables efficient re-renders
-                                    <tr key={transaction.id}>
-                                        <td>{data.accountNumber}</td>
-                                        <td>{transaction.targetOwnerName}</td>
-                                        <td>{transaction.amount}</td>
-                                        <td>{transaction.initiationDate}</td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </fieldset>
-                )}
-            </form>
+                            <button type="submit" className="bank-btn" aria-label="Submit">
+                                🔎 Submit
+                            </button>
+                        </form>
+                    </div>
+
+                    {/* ── Results (shown only when data is loaded) ── */}
+                    {!_.isEmpty(data) && (
+                        <>
+                            {/* Balance Banner */}
+                            <div className="bank-balance">
+                                <div>
+                                    <div className="bank-balance__label">Current Balance</div>
+                                    <div className="bank-balance__amount">
+                                        £{data.currentBalance != null
+                                            ? data.currentBalance.toFixed(2)
+                                            : 'N/A'}
+                                    </div>
+                                </div>
+                                <div className="bank-balance__meta">
+                                    <p>Account <strong>{data.accountNumber}</strong></p>
+                                    <p>Sort Code <strong>{formData.sortCode}</strong></p>
+                                </div>
+                            </div>
+
+                            {/* Transaction Table Card */}
+                            <div className="bank-card">
+                                <div className="bank-card__title">
+                                    📋 Transaction History
+                                    <span style={{marginLeft:'auto', fontSize:'12px', fontWeight:400, color:'#6b7280'}}>
+                                        {data?.transactions?.length ?? 0} record(s)
+                                    </span>
+                                </div>
+
+                                <div className="bank-table-wrap">
+                                    <table className="bank-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Account Number</th>
+                                                <th>Target Owner Name</th>
+                                                <th>Amount (£)</th>
+                                                <th>Initiation Date</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {data?.transactions?.length > 0
+                                                ? data.transactions.map(transaction => (
+                                                    <tr key={transaction.id}>
+                                                        <td>{data.accountNumber}</td>
+                                                        <td>{transaction.targetOwnerName}</td>
+                                                        <td className="amount-cell">£{transaction.amount}</td>
+                                                        <td className="date-cell">{transaction.initiationDate}</td>
+                                                    </tr>
+                                                ))
+                                                : (
+                                                    <tr>
+                                                        <td colSpan="4" className="bank-empty">
+                                                            No transactions found for the selected date range.
+                                                        </td>
+                                                    </tr>
+                                                )
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </>
+                    )}
+
+                    <div className="bank-footer">
+                        &copy; 2024 TrustBank plc &nbsp;·&nbsp; All transactions are protected by 256-bit SSL encryption
+                    </div>
+                </div>
+            </div>
         </>
     );
 }
