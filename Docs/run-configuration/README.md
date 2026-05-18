@@ -5,45 +5,45 @@
 
 ---
 
-## 📑 What is in this Guide?
+##  What is in this Guide?
 
-- [� How to Run the Banking App Using Docker](#-how-to-run-the-banking-app-using-docker)
-  - [📑 What is in this Guide?](#-what-is-in-this-guide)
-  - [💡 What is Docker and Why Do We Need It?](#-what-is-docker-and-why-do-we-need-it)
-  - [🔽 Step 1 — Download and Install Docker Desktop](#-step-1--download-and-install-docker-desktop)
-  - [✅ Step 2 — Check Docker is Working](#-step-2--check-docker-is-working)
-  - [📁 Step 3 — Download / Get the Project Files](#-step-3--download--get-the-project-files)
-  - [💻 Step 4 — Open a Terminal (Command Window)](#-step-4--open-a-terminal-command-window)
+- [ How to Run the Banking App Using Docker](#-how-to-run-the-banking-app-using-docker)
+  - [ What is in this Guide?](#-what-is-in-this-guide)
+  - [ What is Docker and Why Do We Need It?](#-what-is-docker-and-why-do-we-need-it)
+  - [ Step 1 — Download and Install Docker Desktop](#-step-1--download-and-install-docker-desktop)
+  - [ Step 2 — Check Docker is Working](#-step-2--check-docker-is-working)
+  - [ Step 3 — Download / Get the Project Files](#-step-3--download--get-the-project-files)
+  - [ Step 4 — Open a Terminal (Command Window)](#-step-4--open-a-terminal-command-window)
     - [On Windows:](#on-windows)
     - [On Mac:](#on-mac)
     - [On Linux:](#on-linux)
-  - [📂 Step 5 — Go to the Project Folder](#-step-5--go-to-the-project-folder)
-  - [▶️ Step 6 — Start the Application](#️-step-6--start-the-application)
-  - [⏳ Step 7 — Wait for Everything to Start](#-step-7--wait-for-everything-to-start)
-  - [🌐 Step 8 — Open the App in Your Browser](#-step-8--open-the-app-in-your-browser)
+  - [ Step 5 — Go to the Project Folder](#-step-5--go-to-the-project-folder)
+  - [ Step 6 — Start the Application](#️-step-6--start-the-application)
+  - [ Step 7 — Wait for Everything to Start](#-step-7--wait-for-everything-to-start)
+  - [ Step 8 — Open the App in Your Browser](#-step-8--open-the-app-in-your-browser)
   - [🧪 Step 9 — Try the App with Sample Data](#-step-9--try-the-app-with-sample-data)
     - [To test the date filter:](#to-test-the-date-filter)
-  - [🗄️ Step 10 — Connect to the MySQL Database](#️-step-10--connect-to-the-mysql-database)
+  - [ Step 10 — Connect to the MySQL Database](#️-step-10--connect-to-the-mysql-database)
     - [Option A — Using a Database GUI Tool (Easiest for Beginners)](#option-a--using-a-database-gui-tool-easiest-for-beginners)
     - [Option B — Connect Using the Terminal (No Extra Tools Needed)](#option-b--connect-using-the-terminal-no-extra-tools-needed)
     - [Database Details Summary](#database-details-summary)
-  - [🛑 How to Stop the App](#-how-to-stop-the-app)
+  - [ How to Stop the App](#-how-to-stop-the-app)
     - [To stop AND delete all saved data (fresh start):](#to-stop-and-delete-all-saved-data-fresh-start)
-  - [🔧 Something Went Wrong? Fix it Here](#-something-went-wrong-fix-it-here)
-    - [❌ Problem: "Cannot connect to the Docker daemon"](#-problem-cannot-connect-to-the-docker-daemon)
-    - [❌ Problem: Port 3000 is already in use](#-problem-port-3000-is-already-in-use)
-    - [❌ Problem: Port 8080 is already in use](#-problem-port-8080-is-already-in-use)
-    - [❌ Problem: Banking app shows a blank page or error](#-problem-banking-app-shows-a-blank-page-or-error)
-    - [❌ Problem: One container shows "Exited"](#-problem-one-container-shows-exited)
-    - [❌ Problem: MySQL health check keeps failing / backend won't start](#-problem-mysql-health-check-keeps-failing--backend-wont-start)
-    - [❌ Problem: "image not found" or build fails](#-problem-image-not-found-or-build-fails)
-  - [📋 Quick Commands Cheat Sheet](#-quick-commands-cheat-sheet)
-  - [🌐 Where to Open Things](#-where-to-open-things)
-  - [🏁 You Did It!](#-you-did-it)
+  - [ Something Went Wrong? Fix it Here](#-something-went-wrong-fix-it-here)
+    - [Problem: "Cannot connect to the Docker daemon"](#-problem-cannot-connect-to-the-docker-daemon)
+    - [Problem: Port 3000 is already in use](#-problem-port-3000-is-already-in-use)
+    - [Problem: Port 8080 is already in use](#-problem-port-8080-is-already-in-use)
+    - [Problem: Banking app shows a blank page or error](#-problem-banking-app-shows-a-blank-page-or-error)
+    - [Problem: One container shows "Exited"](#-problem-one-container-shows-exited)
+    - [ Problem: MySQL health check keeps failing / backend won't start](#-problem-mysql-health-check-keeps-failing--backend-wont-start)
+    - [ Problem: "image not found" or build fails](#-problem-image-not-found-or-build-fails)
+  - [Quick Commands Cheat Sheet](#-quick-commands-cheat-sheet)
+  - [ Where to Open Things](#-where-to-open-things)
+  - [You Did It!](#-you-did-it)
 
 ---
 
-## 💡 What is Docker and Why Do We Need It?
+## What is Docker and Why Do We Need It?
 
 Think of Docker like a **lunchbox**.
 
@@ -62,20 +62,20 @@ This app has **3 containers** that start together:
 
 ---
 
-## 🔽 Step 1 — Download and Install Docker Desktop
+## Step 1 — Download and Install Docker Desktop
 
 1. Go to this website: **https://www.docker.com/products/docker-desktop**
 2. Click the big **Download** button for your operating system (Windows / Mac / Linux)
 3. Open the downloaded file and follow the installer steps (just keep clicking **Next** / **OK**)
 4. When it asks to restart your computer, say **Yes**
 5. After restart, open **Docker Desktop** from your Start Menu or Desktop shortcut
-6. Wait for the Docker whale icon 🐳 to appear in your taskbar and show **"Engine running"**
+6. Wait for the Docker whale icon to appear in your taskbar and show **"Engine running"**
 
-> ✅ Docker Desktop is ready when you see the green dot and the message **"Docker Desktop is running"**.
+> Docker Desktop is ready when you see the green dot and the message **"Docker Desktop is running"**.
 
 ---
 
-## ✅ Step 2 — Check Docker is Working
+## Step 2 — Check Docker is Working
 
 Open a terminal (see Step 4 below for how to open one) and type this command:
 
@@ -101,11 +101,11 @@ You should see something like:
 Docker Compose version v2.20.2
 ```
 
-> ✅ If you see version numbers, Docker is ready. If you see an error, go back to Step 1 and make sure Docker Desktop is open and running.
+> If you see version numbers, Docker is ready. If you see an error, go back to Step 1 and make sure Docker Desktop is open and running.
 
 ---
 
-## 📁 Step 3 — Download / Get the Project Files
+## Step 3 — Download / Get the Project Files
 
 You need the project folder on your computer. The main folder is called **`Documents-main`**.
 
@@ -123,11 +123,11 @@ Documents-main/
 └── docs/                                ← Documentation (you are reading this!)
 ```
 
-> ⚠️ **Important:** Make sure the file `docker-compose.yml` exists inside the `Documents-main` folder. Without it, nothing will work.
+> **Important:** Make sure the file `docker-compose.yml` exists inside the `Documents-main` folder. Without it, nothing will work.
 
 ---
 
-## 💻 Step 4 — Open a Terminal (Command Window)
+## Step 4 — Open a Terminal (Command Window)
 
 A terminal is a window where you type commands. Here is how to open one:
 
@@ -143,11 +143,11 @@ A terminal is a window where you type commands. Here is how to open one:
 ### On Linux:
 - Press **Ctrl + Alt + T**
 
-> 💡 You will type all the commands from this guide into this terminal window.
+> You will type all the commands from this guide into this terminal window.
 
 ---
 
-## 📂 Step 5 — Go to the Project Folder
+## Step 5 — Go to the Project Folder
 
 In your terminal, type the `cd` command to **navigate into the project folder**.
 
@@ -177,11 +177,11 @@ dir
 ls
 ```
 
-You should see `docker-compose.yml` listed in the output. ✅
+You should see `docker-compose.yml` listed in the output. 
 
 ---
 
-## ▶️ Step 6 — Start the Application
+## Step 6 — Start the Application
 
 This is the **magic command**. It will:
 - Download all the required software (only on first run)

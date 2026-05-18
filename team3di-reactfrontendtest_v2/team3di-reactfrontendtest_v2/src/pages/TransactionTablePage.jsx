@@ -1,5 +1,5 @@
 
-import React, { useState }  from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import _ from "lodash"
 
@@ -7,16 +7,22 @@ const TransactionTablePage = () => {
     const [data, setData] = useState([]);
     const [formData, setFormData] = useState({})
     // Fix: correct destructuring – second element is the setter, first (unused) is the value
-    const [, setError] = useState({})
+    //const [, setError] = useState({})
+    const [errors, setErrors] = useState({})
 
     const getData = async (apiUrl, body, header) => {
         try {
             const resp = await axios.put(apiUrl, body, { header });
             setData(resp.data);
-        } catch (err) {
+        } /*catch (err) {
             // Handle Error Here
             setError(err.response.data)
             alert(err.response.data)
+        }*/
+        catch (err) {
+            setErrors({
+                api: err.response?.data || "Something went wrong"
+            });
         }
     };
 
@@ -26,10 +32,33 @@ const TransactionTablePage = () => {
         // ES6 destructuring – includes new date range fields
         const { sortCode, accountNumber, startDate, endDate } = formData;
 
-        if (_.isEmpty(sortCode) || _.isEmpty(accountNumber)) {
+        /*if (_.isEmpty(sortCode) || _.isEmpty(accountNumber)) {
             setError({ message: 'Sort code and account number cannot be blank' })
-            alert('Sort code and account number cannot be blank')
+           // alert('Sort code and account number cannot be blank')
+           alert(err.response.data)
             return
+        }*/
+        const validationErrors = {};
+
+        if (_.isEmpty(sortCode)) {
+            validationErrors.sortCode = "Sort code is required";
+        } else if (!/^\d{2}-\d{2}-\d{2}$/.test(sortCode)) {
+            validationErrors.sortCode =
+                "Sort code must be in XX-XX-XX format & must not be empty";
+        }
+
+        if (_.isEmpty(accountNumber)) {
+            validationErrors.accountNumber =
+                "Account number is required";
+        } else if (!/^\d{8}$/.test(accountNumber)) {
+            validationErrors.accountNumber =
+                "Account number must be 8 digits";
+        }
+
+        setErrors(validationErrors);
+
+        if (Object.keys(validationErrors).length > 0) {
+            return;
         }
 
         const url = '/api/v1/alltransactions'
@@ -41,7 +70,7 @@ const TransactionTablePage = () => {
             sortCode,
             accountNumber,
             startDate: startDate || null,
-            endDate:   endDate   || null,
+            endDate: endDate || null,
         }
 
         const headers = {
@@ -90,17 +119,35 @@ const TransactionTablePage = () => {
                         </div>
 
                         <form onSubmit={handleSubmit}>
+                            {errors.api && (
+                                <div className="bank-global-error">
+                                    {errors.api}
+                                </div>
+                            )}
                             <div className="bank-form-grid">
                                 {/* Sort Code */}
                                 <div className="bank-field">
                                     <label htmlFor="sortCode">Sort Code:</label>
+                                    {errors.sortCode && (
+                                        <div className="bank-error">
+                                            {errors.sortCode}
+                                        </div>
+                                    )}
+
                                     <input
                                         id="sortCode"
                                         type="text"
                                         name="sortCode"
                                         placeholder="e.g. 53-68-92"
-                                        onChange={(e) => handleChange(e)}
-                                        value={formData.sortCode || ''}
+                                        onChange={(e) => {
+                                            handleChange(e);
+
+                                            setErrors(prev => ({
+                                                ...prev,
+                                                sortCode: ""
+                                            }));
+                                        }}
+                                        className={errors.sortCode ? "bank-input-error" : ""}
                                     />
                                     <span className="bank-hint">Format: XX-XX-XX</span>
                                 </div>
@@ -108,20 +155,34 @@ const TransactionTablePage = () => {
                                 {/* Account Number */}
                                 <div className="bank-field">
                                     <label htmlFor="accountNumber">Account Number:</label>
+
+                                    {errors.accountNumber && (
+                                        <div className="bank-error">
+                                            {errors.accountNumber}
+                                        </div>
+                                    )}
+
                                     <input
                                         id="accountNumber"
                                         type="text"
                                         name="accountNumber"
-                                        placeholder="e.g. 73084635"
-                                        onChange={(e) => handleChange(e)}
-                                        value={formData.accountNumber || ''}
+                                        placeholder="8-digit account number"
+                                        onChange={(e) => {
+                                            handleChange(e);
+
+                                            setErrors(prev => ({
+                                                ...prev,
+                                                accountNumber: ""
+                                            }));
+                                        }}
+                                        className={errors.accountNumber ? "bank-input-error" : ""}
                                     />
                                     <span className="bank-hint">8-digit account number</span>
                                 </div>
 
                                 {/* Task 2: Start Date */}
                                 <div className="bank-field">
-                                    <label htmlFor="startDate">Start Date <em style={{fontWeight:400,color:'#9ca3af'}}>(optional)</em></label>
+                                    <label htmlFor="startDate">Start Date <em style={{ fontWeight: 400, color: '#9ca3af' }}>(optional)</em></label>
                                     <input
                                         id="startDate"
                                         type="date"
@@ -134,7 +195,7 @@ const TransactionTablePage = () => {
 
                                 {/* Task 2: End Date */}
                                 <div className="bank-field">
-                                    <label htmlFor="endDate">End Date <em style={{fontWeight:400,color:'#9ca3af'}}>(optional)</em></label>
+                                    <label htmlFor="endDate">End Date <em style={{ fontWeight: 400, color: '#9ca3af' }}>(optional)</em></label>
                                     <input
                                         id="endDate"
                                         type="date"
@@ -180,7 +241,7 @@ const TransactionTablePage = () => {
                             <div className="bank-card">
                                 <div className="bank-card__title">
                                     📋 Transaction History
-                                    <span style={{marginLeft:'auto', fontSize:'12px', fontWeight:400, color:'#6b7280'}}>
+                                    <span style={{ marginLeft: 'auto', fontSize: '12px', fontWeight: 400, color: '#6b7280' }}>
                                         {data?.transactions?.length ?? 0} record(s)
                                     </span>
                                 </div>

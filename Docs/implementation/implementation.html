@@ -346,9 +346,9 @@
   </div>
 
   <h3>📂 File Changed</h3>
-  <span class="file-chip">⚛️ src/pages/TransactionTablePage.jsx</span>
+  <span class="file-chip">src/pages/TransactionTablePage.jsx</span>
 
-  <h3 style="margin-top:16px;">✏️ What we changed</h3>
+  <h3 style="margin-top:16px;">What we changed</h3>
 
   <div class="flow">
     <div class="flow-item">
@@ -541,18 +541,18 @@ List&lt;Transaction&gt; <span class="fn">findBySourceAccountIdAndInitiationDateB
 
 <!-- ─────────────  UNIT TESTS  ───────────── -->
 <div class="card">
-  <h2>🧪 Unit Tests — Proving It Works</h2>
+  <h2>Unit Tests — Proving It Works</h2>
   <span class="badge b-test">6 Mockito Tests</span>
 
   <div class="callout callout-purple">
-    <strong>🤔 Why unit tests?</strong><br>
+    <strong> Why unit tests?</strong><br>
     Unit tests run without a database or server. They check that each piece of logic is correct on its own. Mockito lets us "fake" the database layer so we can test the service in isolation.
   </div>
 
-  <h3>📂 New Test File</h3>
-  <span class="file-chip">🧪 src/test/java/.../TransactionDateRangeTest.java</span>
+  <h3> New Test File</h3>
+  <span class="file-chip">src/test/java/.../TransactionDateRangeTest.java</span>
 
-  <h3 style="margin-top:16px;">📋 The 6 Test Scenarios</h3>
+  <h3 style="margin-top:16px;">The 6 Test Scenarios</h3>
   <table>
     <tr>
       <th>#</th>
@@ -598,14 +598,14 @@ List&lt;Transaction&gt; <span class="fn">findBySourceAccountIdAndInitiationDateB
 
 <!-- ─────────────  DOCKER  ───────────── -->
 <div class="card">
-  <h2>🐳 Docker — One Command to Rule Them All</h2>
+  <h2>Docker — One Command to Rule Them All</h2>
   <span class="badge b-docker">Infrastructure</span>
 
   <p>Four new files were created to make the entire app runnable with a single command:</p>
 
   <div class="two-col" style="margin-bottom:20px;">
     <div style="border:1px solid var(--border);border-radius:10px;padding:18px;">
-      <span class="file-chip">🐳 docker-compose.yml</span>
+      <span class="file-chip">docker-compose.yml</span>
       <p style="margin-top:10px;">The "conductor" file. Defines all three services and how they connect:</p>
       <ul>
         <li><strong>mysql</strong> — MySQL 8.0 database with health check</li>
@@ -614,7 +614,7 @@ List&lt;Transaction&gt; <span class="fn">findBySourceAccountIdAndInitiationDateB
       </ul>
     </div>
     <div style="border:1px solid var(--border);border-radius:10px;padding:18px;">
-      <span class="file-chip">⚛️ frontend/Dockerfile</span>
+      <span class="file-chip">frontend/Dockerfile</span>
       <p style="margin-top:10px;">Two-stage build:</p>
       <ul>
         <li>Stage 1: Install Node.js, run <code>npm install</code>, run <code>npm run build</code></li>
@@ -622,7 +622,7 @@ List&lt;Transaction&gt; <span class="fn">findBySourceAccountIdAndInitiationDateB
       </ul>
     </div>
     <div style="border:1px solid var(--border);border-radius:10px;padding:18px;">
-      <span class="file-chip">☕ backend/Dockerfile</span>
+      <span class="file-chip">backend/Dockerfile</span>
       <p style="margin-top:10px;">Two-stage build:</p>
       <ul>
         <li>Stage 1: Use Maven to compile the Java code into a JAR file</li>
@@ -630,7 +630,7 @@ List&lt;Transaction&gt; <span class="fn">findBySourceAccountIdAndInitiationDateB
       </ul>
     </div>
     <div style="border:1px solid var(--border);border-radius:10px;padding:18px;">
-      <span class="file-chip">🌐 nginx.conf</span>
+      <span class="file-chip">nginx.conf</span>
       <p style="margin-top:10px;">Tells nginx two things:</p>
       <ul>
         <li>Requests starting with <code>/api/</code> → forward to the Spring Boot backend</li>
@@ -639,12 +639,12 @@ List&lt;Transaction&gt; <span class="fn">findBySourceAccountIdAndInitiationDateB
     </div>
   </div>
 
-  <h3>🔄 Startup Order</h3>
+  <h3>Startup Order</h3>
   <div class="flow">
-    <div class="flow-item"><div class="flow-dot"></div><div>🗄️ <strong>MySQL starts first</strong> — Docker waits until the health check passes (database is ready to accept connections)</div></div>
-    <div class="flow-item"><div class="flow-dot"></div><div>☕ <strong>Spring Boot starts second</strong> — only after MySQL is healthy, so no "connection refused" errors</div></div>
-    <div class="flow-item"><div class="flow-dot"></div><div>⚛️ <strong>React / nginx starts in parallel</strong> — it doesn't need the backend to start; it's just static files</div></div>
-    <div class="flow-item"><div class="flow-dot"></div><div>✅ <strong>App is live</strong> — open <code>http://localhost:3000</code></div></div>
+    <div class="flow-item"><div class="flow-dot"></div><div><strong>MySQL starts first</strong> — Docker waits until the health check passes (database is ready to accept connections)</div></div>
+    <div class="flow-item"><div class="flow-dot"></div><div><strong>Spring Boot starts second</strong> — only after MySQL is healthy, so no "connection refused" errors</div></div>
+    <div class="flow-item"><div class="flow-dot"></div><div><strong>React / nginx starts in parallel</strong> — it doesn't need the backend to start; it's just static files</div></div>
+    <div class="flow-item"><div class="flow-dot"></div><div><strong>App is live</strong> — open <code>http://localhost:3000</code></div></div>
   </div>
 
   <div class="callout callout-info">
@@ -662,9 +662,9 @@ List&lt;Transaction&gt; <span class="fn">findBySourceAccountIdAndInitiationDateB
 
   <table>
     <tr>
-      <th>🐛 Problem</th>
-      <th>📍 Where</th>
-      <th>✅ Fix Applied</th>
+      <th>Problem</th>
+      <th>Where</th>
+      <th>Fix Applied</th>
     </tr>
     <tr>
       <td><code>openjdk:17-jdk-slim</code> not found on Docker Hub</td>
@@ -691,7 +691,7 @@ List&lt;Transaction&gt; <span class="fn">findBySourceAccountIdAndInitiationDateB
 
 <!-- ─────────────  FILES CHANGED  ───────────── -->
 <div class="card">
-  <h2>📁 Complete List of Files Changed or Created</h2>
+  <h2>Complete List of Files Changed or Created</h2>
   <table>
     <tr>
       <th>File</th>
@@ -699,62 +699,62 @@ List&lt;Transaction&gt; <span class="fn">findBySourceAccountIdAndInitiationDateB
       <th>What Changed</th>
     </tr>
     <tr>
-      <td><span class="file-chip">⚛️ TransactionTablePage.jsx</span></td>
+      <td><span class="file-chip">TransactionTablePage.jsx</span></td>
       <td><span class="tag">Modified</span></td>
       <td>Added balance display, startDate/endDate state, two date inputs, passes dates in API call</td>
     </tr>
     <tr>
-      <td><span class="file-chip">☕ AllTransactionsInput.java</span></td>
+      <td><span class="file-chip">AllTransactionsInput.java</span></td>
       <td><span class="tag" style="background:#e8f5e9;color:#2e7d32;">New File</span></td>
       <td>New DTO extending AccountInput — adds startDate + endDate fields</td>
     </tr>
     <tr>
-      <td><span class="file-chip">☕ TransactionRestController.java</span></td>
+      <td><span class="file-chip">TransactionRestController.java</span></td>
       <td><span class="tag">Modified</span></td>
       <td>getAllTransactions now accepts AllTransactionsInput; routes to date-range or all-transactions</td>
     </tr>
     <tr>
-      <td><span class="file-chip">☕ AccountService.java</span></td>
+      <td><span class="file-chip">AccountService.java</span></td>
       <td><span class="tag">Modified</span></td>
       <td>New method findTransactionsByDateRange — looks up account, parses dates, calls transaction service</td>
     </tr>
     <tr>
-      <td><span class="file-chip">☕ TransactionService.java</span></td>
+      <td><span class="file-chip">TransactionService.java</span></td>
       <td><span class="tag">Modified</span></td>
       <td>New method getTransactionsByDateRange — calls repository with LocalDateTime start/end</td>
     </tr>
     <tr>
-      <td><span class="file-chip">☕ TransactionRepository.java</span></td>
+      <td><span class="file-chip">TransactionRepository.java</span></td>
       <td><span class="tag">Modified</span></td>
       <td>New derived query method for BETWEEN date range ordered by initiationDate</td>
     </tr>
     <tr>
-      <td><span class="file-chip">🧪 TransactionDateRangeTest.java</span></td>
+      <td><span class="file-chip">TransactionDateRangeTest.java</span></td>
       <td><span class="tag" style="background:#e8f5e9;color:#2e7d32;">New File</span></td>
       <td>6 Mockito unit tests covering the date range filtering logic</td>
     </tr>
     <tr>
-      <td><span class="file-chip">🐳 docker-compose.yml</span></td>
+      <td><span class="file-chip">docker-compose.yml</span></td>
       <td><span class="tag" style="background:#e8f5e9;color:#2e7d32;">New File</span></td>
       <td>Defines all 3 services with networking, health checks and dependency ordering</td>
     </tr>
     <tr>
-      <td><span class="file-chip">🐳 backend/Dockerfile</span></td>
+      <td><span class="file-chip">backend/Dockerfile</span></td>
       <td><span class="tag" style="background:#e8f5e9;color:#2e7d32;">New File</span></td>
       <td>Two-stage Maven + eclipse-temurin build for the Spring Boot JAR</td>
     </tr>
     <tr>
-      <td><span class="file-chip">🐳 frontend/Dockerfile</span></td>
+      <td><span class="file-chip">frontend/Dockerfile</span></td>
       <td><span class="tag" style="background:#e8f5e9;color:#2e7d32;">New File</span></td>
       <td>Two-stage Node + nginx build for the React app</td>
     </tr>
     <tr>
-      <td><span class="file-chip">🌐 nginx.conf</span></td>
+      <td><span class="file-chip">nginx.conf</span></td>
       <td><span class="tag" style="background:#e8f5e9;color:#2e7d32;">New File</span></td>
       <td>Proxies /api/ to backend:8080; all other routes serve index.html (SPA support)</td>
     </tr>
     <tr>
-      <td><span class="file-chip">📦 pom.xml</span></td>
+      <td><span class="file-chip">pom.xml</span></td>
       <td><span class="tag">Modified</span></td>
       <td>Added spring-boot-maven-plugin repackage execution so Docker gets a runnable JAR</td>
     </tr>
@@ -839,7 +839,7 @@ List&lt;Transaction&gt; <span class="fn">findBySourceAccountIdAndInitiationDateB
 </div>
 
 <footer>
-  <p>🛠️ Implementation Document &nbsp;·&nbsp; 3Di Assessment &nbsp;·&nbsp; Online Banking Application &nbsp;·&nbsp; 2026</p>
+  <p>Implementation Document &nbsp;·&nbsp; 3Di Assessment &nbsp;·&nbsp; Online Banking Application &nbsp;·&nbsp; 2026</p>
 </footer>
 
 </body>
